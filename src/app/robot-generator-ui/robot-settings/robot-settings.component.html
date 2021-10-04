@@ -1,0 +1,12 @@
+<h2>Customize your Robot</h2>
+<div>
+  <input 
+    type="range"
+    id="size" 
+    name="size"
+    min="0" 
+    max="400"
+    [value]="sizeValue" (change)="changeSizeValue($event)"
+    >
+  <label for="size">Size</label>
+</div>
