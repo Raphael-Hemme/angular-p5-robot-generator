@@ -10,21 +10,22 @@ import { CustomizationSettingsService } from 'src/app/services/customization-set
 })
 export class RobotSketchComponent implements OnInit {
 
-  canvas: any;
-  // public circleSize:number = 0; 
+  public canvas: any;
+  // public currCircleSize = this.customizationSettingsService.getCustomSize();
+  private currCircleSize: number;
+  private lastCircleSize: number;
 
   constructor(
     public customizationSettingsService: CustomizationSettingsService
   ) {}
-
-  // This is not working. Including a call to the service's getCustomSize() method results in 60 calls per minute however.
-  // Use RxJS observable with a unique operator and a debounceTime instead.
-  /*   ngOnChanges (): void {
-    this.circleSize = this.customizationSettingsService.getCustomSize()
-  } */
-       
-
+  
   ngOnInit() {
+
+    this.customizationSettingsService.circleSizeSubject.subscribe(res => {
+      console.log('res: ', res);
+      this.currCircleSize = res;
+    });
+
     const sketch = (s: any) => {
       s.setup = () => {
         let canvas2 = s.createCanvas(s.windowWidth - 200, s.windowHeight - 200);
@@ -41,7 +42,7 @@ export class RobotSketchComponent implements OnInit {
         s.noFill()
         s.stroke(123, 212, 15, 255);
         //s.circle(s.width /2, s.height / 2, this.circleSize);
-        s.circle(s.width /2, s.height / 2, this.customizationSettingsService.getCustomSize());
+        s.circle(s.width /2, s.height / 2, this.currCircleSize);
         }
       };
 

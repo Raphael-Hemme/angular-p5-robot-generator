@@ -6,7 +6,8 @@
     name="size"
     min="0" 
     max="400"
-    [value]="sizeValue" (change)="changeSizeValue($event)"
+    [value]="sizeValue" 
+    (input)="changeSizeValue($event)"
     >
   <label for="size">Size</label>
 </div>

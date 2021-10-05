@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,15 +8,14 @@ export class CustomizationSettingsService {
 
   constructor() { }
 
-  private customSize: number;
+  public circleSizeSubject = new BehaviorSubject(0);
+  
+
+
 
   public setCustomSize (value: number): void {
-    console.log(this.customSize)
-    this.customSize = value;
+    console.log('setting');
+    this.circleSizeSubject.next(value);
   }
 
-  public getCustomSize (): number {
-    console.log(this.customSize)
-    return this.customSize;
-  }
 }
